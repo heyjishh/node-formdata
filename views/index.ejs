@@ -25,43 +25,28 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Arshad</td>
-						<td>arshad@myhealthcare.life</td>
-						<td>Male</td>
-						<td>Active</td>
-						<td>
-							<a href="/update-user" class="btn border-shadow update">
-								<span class="text-gradient"
-									><i class="fas fa-pencil-alt"></i
-								></span>
-							</a>
-							<a class="btn border-shadow delete">
-								<span class="text-gradient"><i class="fas fa-times"></i></span>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>Arshad</td>
-						<td>arshad@myhealthcare.life</td>
-						<td>Male</td>
-						<td>Active</td>
-						<td>
-							<a href="/update-user" class="btn border-shadow update">
-								<span class="text-gradient"
-									><i class="fas fa-pencil-alt"></i
-								></span>
-							</a>
-							<a class="btn border-shadow delete">
-								<span class="text-gradient"><i class="fas fa-times"></i></span>
-							</a>
-						</td>
-					</tr>
-
 					
-				</tbody>
+					<% for(var i=0; i<newData.length; i++) {%>
+						<tr>
+						<td><%= i+1 %></td>
+						<td><%= newData[i].name %></td>
+						<td><%= newData[i].email %></td>
+						<td><%= newData[i].gender %></td>
+						<td><%= newData[i].status %></td>
+						<td>
+							<a href="/update-user" class="btn border-shadow update">
+								<span class="text-gradient"
+									><i class="fas fa-pencil-alt"></i
+								></span>
+							</a>
+							<a class="btn border-shadow delete">
+								<span class="text-gradient"><i class="fas fa-times"></i></span>
+							</a>
+						</td>
+					
+					</tr>
+					<% } %>
+					</tbody>
 				</tbody>
 			</table>
 		</form>

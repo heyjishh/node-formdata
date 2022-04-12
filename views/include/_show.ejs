@@ -1,10 +1,10 @@
-<% for(var i = 0; i < data.length; i++) { %>
+<% for(var i = 0; i < someting.length; i++) { %>
 <tr>
 	<td><%= i + 1 %></td>
-	<td><%= data[i].name %></td>
-	<td><%= data[i].email %></td>
-	<td><%= data[i].gender %></td>
-	<td><%= data[i].status %></td>
+	<td><%= someting[i].name %></td>
+	<td><%= someting[i].email %></td>
+	<td><%= someting[i].gender %></td>
+	<td><%= someting[i].status %></td>
 	<td>
 		<a
 			href="/update-user?id=<%= users[i]._id%>"
