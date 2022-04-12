@@ -107,6 +107,7 @@ app.get("/", function (req, res) {
 	studentModel.find({}, (err, data) => {
 		// note that data is an array of objects, not a single object!
 		const newData = data;
+		console.log(newData);
 		res.render("index", { newData });
 	});
 });
