@@ -8,10 +8,13 @@ const route = require("./server/routes/router");
 // const services = require('../services/render');
 const studentModel = require("./server/model/model");
 
+let storeData = ""; //jishEdit
+
 const app = express();
 dotenv.config({ path: "config.env" });
 // app.use("/", route);
 const PORT = process.env.PORT || 8080;
+app.use(express.json());
 
 // log request
 // app.use(morgan("tiny"));
@@ -27,9 +30,13 @@ app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 
-app.get("/", (req, res) => {
-	res.render("index");
-});
+// app.get("/", (req, res) => {
+// 	params = {
+// 		data: storeData,
+// 		name: "jishcoder",
+// 	};
+// 	res.render("index", { params });
+// });
 
 app.get("/add-user", (req, res) => {
 	res.render("add_user");
@@ -57,9 +64,9 @@ app.post("/add-user", (req, res) => {
 	storeData
 		.save()
 		.then((result) => {
-			console.log(result);
+			// console.log(result);
 			res.send(storeData);
-			res.redirect("/add-user");
+			//res.redirect("/");
 		})
 		.catch((err) => {
 			res.status(500).send({ message: err.message || "Not empty" });
@@ -67,18 +74,59 @@ app.post("/add-user", (req, res) => {
 	// res.render("add_user");
 });
 
-app.get("/get-users", (req, res) => {
-	studentModel
-		.find()
-		.then((result) => {
-			var data = result;
-			console.log(data);
-			res.send(data);
-		})
-		.catch((err) => {
-			res.status(500).send({ message: err.message || "Not empty" });
-		});
+// .// .// .// .// .//
+// .// .// .// .// .//
+// .// .// .// .// .//
+// ORIGNAL CODE
+// .// .// .// .// .//
+// .// .// .// .// .//
+// .// .// .// .// .//
+
+// app.get("/get-users", (req, res) => {
+// 	studentModel
+// 		.find()
+
+// 		.then((result) => {
+// 			res.send(result);
+// 		})
+// 		.catch((err) => {
+// 			res.status(500).send({ message: err.message || "Not empty" });
+// 		});
+// });
+
+// .// .// .// .// .//
+// .// .// .// .// .//
+// .// .// .// .// .//
+// MAKING DEMO CHANGES IN CODE BY JISH
+// .// .// .// .// .//
+// .// .// .// .// .//
+// .// .// .// .// .//
+
+app.get("/", function (req, res) {
+	// mongoose operations are asynchronous, so you need to wait
+	studentModel.find({}, (err, data) => {
+		// note that data is an array of objects, not a single object!
+		const newData = data;
+		res.render("index", { newData });
+	});
 });
+
+//
+// route code
+// var mascots = [
+// 	{ name: "Sammy", organization: "DigitalOcean", birth_year: 2012 },
+// 	{ name: "Tux", organization: "Linux", birth_year: 1996 },
+// 	{ name: "Moby Dock", organization: "Docker", birth_year: 2013 },
+// ];
+// var tagline =
+// 	"No programming concept is complete without a cute animal mascot.";
+
+// res.render("pages/index", {
+// mascots: mascots,
+// tagline: tagline,
+// });
+
+///
 
 app.listen(PORT, () => {
 	console.log(`service is running on http://localhost:${PORT}`);
